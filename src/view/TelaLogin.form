@@ -49,7 +49,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTxtUsario" max="32767" attributes="0"/>
+                          <Component id="jTxtUsuario" max="32767" attributes="0"/>
                           <Component id="jTxtSenha" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -64,7 +64,7 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtUsario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -98,7 +98,7 @@
         <Property name="text" type="java.lang.String" value="Senha"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtUsario">
+    <Component class="javax.swing.JTextField" name="jTxtUsuario">
     </Component>
     <Component class="javax.swing.JPasswordField" name="jTxtSenha">
     </Component>
@@ -114,6 +114,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnLoginActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jBtnLoginKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblstatus">

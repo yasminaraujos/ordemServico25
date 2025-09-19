@@ -41,8 +41,17 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 //Usuario logou
-                TelaPrincipal tela = new TelaPrincipal();
-                tela.setVisible(true);
+                String perfil = rs.getString(6);
+                if (perfil.equals("admin")){
+                    TelaPrincipal tela = new TelaPrincipal();
+                    tela.setVisible(true);
+                    tela.jMnItmUsuario.setEnabled(true);
+                    tela.jMnRelatorio.setEnabled(true);
+                    tela.jLblUsuario.setText(rs.getString(2));
+                } else {
+                    TelaPrincipal tela = new TelaPrincipal();
+                    tela.setVisible(true);
+                }
                 
             } else {
                 //Dados incorretos

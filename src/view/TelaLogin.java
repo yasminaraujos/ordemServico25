@@ -31,7 +31,8 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
-/**
+/**3
+ * 
  * Autenticação do usuário
  *
  * @author Professor Cleber Feitosa
@@ -124,7 +125,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTxtUsario = new javax.swing.JTextField();
+        jTxtUsuario = new javax.swing.JTextField();
         jTxtSenha = new javax.swing.JPasswordField();
         jBtnLogin = new javax.swing.JButton();
         jlblstatus = new javax.swing.JLabel();
@@ -153,6 +154,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 jBtnLoginActionPerformed(evt);
             }
         });
+        jBtnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jBtnLoginKeyPressed(evt);
+            }
+        });
 
         jlblstatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/dberror.png"))); // NOI18N
 
@@ -174,7 +180,7 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTxtUsario)
+                            .addComponent(jTxtUsuario)
                             .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -184,7 +190,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTxtUsario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,7 +215,7 @@ public class TelaLogin extends javax.swing.JFrame {
         try {
             String usario, senha;
            
-            usario = jTxtUsario.getText();
+            usario = jTxtUsuario.getText();
             senha = jTxtSenha.getText();
             
             UsuarioDAO  dao = new UsuarioDAO();
@@ -223,7 +229,28 @@ public class TelaLogin extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "erro");
         }
+    
     }//GEN-LAST:event_jBtnLoginActionPerformed
+
+    private void jBtnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnLoginKeyPressed
+        try {
+            String usario, senha;
+           
+            usario = jTxtUsuario.getText();
+            senha = jTxtSenha.getText();
+            
+            UsuarioDAO  dao = new UsuarioDAO();
+ 
+            
+            dao.efetuaLogin(usario, senha);
+            
+            
+            this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "erro");
+        }                    
+    }//GEN-LAST:event_jBtnLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -260,7 +287,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jTxtSenha;
-    private javax.swing.JTextField jTxtUsario;
+    private javax.swing.JTextField jTxtUsuario;
     private javax.swing.JLabel jlblstatus;
     // End of variables declaration//GEN-END:variables
 }
