@@ -4,6 +4,10 @@
  */
 package view;
 
+import controller.UsuarioDAO;
+import javax.swing.JOptionPane;
+import model.Usuario;
+
 /**
  *
  * @author GERAL
@@ -81,7 +85,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jTxtlabel7.setText("*Perfil");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "user" }));
 
         jCheckBoxSenha.setText("Alterar a senha");
 
@@ -184,7 +188,18 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldIdActionPerformed
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-        // TODO add your handling code here:
+        Usuario obj = new Usuario();
+        obj.setUsuario(jTextFieldId.getText());
+        obj.setFone (jTextFieldFone.getText());
+        obj.setLogin(jTextFieldLogin.getText());
+        obj.setSenha(jPasswordField1.getText());
+        obj.setPerfil(jComboBox1.getSelectedItem().toString());
+        if ((jTextFieldId.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFieldLogin.getText().isEmpty()) || (jPasswordField1.getPassword().length == 0) || (jComboBox1.getSelectedItem().equals(" "))){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+        } else{
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.adicionarUsuario(obj);
+        }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
 

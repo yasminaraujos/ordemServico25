@@ -207,8 +207,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMNItmClienteActionPerformed
 
     private void jMNItmUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNItmUsuarioActionPerformed
-       // TelaUsuario usuario = new TelaUsuario();
-       //usuario.setVisible(true);
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
+        jDesktopPane1.add(usuario);
     }//GEN-LAST:event_jMNItmUsuarioActionPerformed
 
     private void jMNRelServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNRelServicosActionPerformed
@@ -283,7 +284,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenu jMNCadastro;
     private javax.swing.JMenuItem jMNItmCliente;
     private javax.swing.JMenuItem jMNItmOrdemServico;
-    private javax.swing.JMenuItem jMNItmUsuario;
+    public static javax.swing.JMenuItem jMNItmUsuario;
     private javax.swing.JMenuItem jMNRelClientes;
     private javax.swing.JMenuItem jMNRelServicos;
     public static javax.swing.JMenu jMNRelatório;

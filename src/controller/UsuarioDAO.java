@@ -4,14 +4,17 @@
  */
 package controller;
 
-import java.sql.Connection;
+import java.awt.HeadlessException;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import jdbc.ModuloConexao;
+import model.Usuario;
 import view.TelaLogin;
 import view.TelaPrincipal;
+
 
 /**
  *
@@ -29,7 +32,6 @@ public class UsuarioDAO {
     public void efetuaLogin(String email, String senha ) {
        
         try {
-
             //1 passo - SQL
             String sql = "select * from tbusuarios where usuario = ? and senha = ?";
             PreparedStatement stmt;
@@ -45,8 +47,8 @@ public class UsuarioDAO {
                 if (perfil.equals("admin")){
                     TelaPrincipal tela = new TelaPrincipal();
                     tela.setVisible(true);
-                    tela.jMnItmUsuario.setEnabled(true);
-                    tela.jMnRelatorio.setEnabled(true);
+                    tela.jMNItmUsuario.setEnabled(true);
+                    tela.jMNRelatório.setEnabled(true);
                     tela.jLblUsuario.setText(rs.getString(2));
                 } else {
                     TelaPrincipal tela = new TelaPrincipal();
@@ -59,11 +61,37 @@ public class UsuarioDAO {
                 new TelaLogin().setVisible(true);
             }
 
-        } catch (SQLException erro) {
+        }catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro : " + erro);
         }
-
     }
-    
+    public void adicionarUsuario (Usuario obj){
+        try{
+            String sql = "insert into tbusuarios(iduser,usuario,fone,login,senha,perfil) values(?,?,?,?,?,?)";
+            con = ModuloConexao.conectar();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt (1, obj.getIdUser ());
+            stmt.setString(2, obj.getUsuario());
+            stmt.setString(3, obj.getFone());
+            stmt.setString(4, obj.getLogin());
+            stmt.setString(5, obj.getSenha());
+            stmt.setString(6, obj.getPerfil());
+            
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Usuario cadrastado com sucesso!");
+            
+        } catch(SQLIntegrityConstraintViolationException el){
+           JOptionPane.showMessageDialog(null, "Login em uso.\nEscolha outro login."); 
+        } catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try{
+                con.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+    }
     
 }

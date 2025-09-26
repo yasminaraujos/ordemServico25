@@ -26,9 +26,6 @@ package view;
 import controller.UsuarioDAO;
 import java.sql.*;
 import jdbc.ModuloConexao;
-import java.awt.Color;
-import java.awt.HeadlessException;
-import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**3
@@ -42,10 +39,7 @@ public class TelaLogin extends javax.swing.JFrame {
     Connection conexao;
     PreparedStatement pst;
     ResultSet rs;
-    
-    /**
-     * Creates new form TelaLogin
-     */
+ 
     public TelaLogin() {
         initComponents();        
     }
@@ -71,7 +65,6 @@ public class TelaLogin extends javax.swing.JFrame {
             }
        }
     }
-
     /**
      * Método responsável pela autenticação e gestão de perfil do usuário
      */
