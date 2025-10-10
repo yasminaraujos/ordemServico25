@@ -9,7 +9,7 @@
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[921, 552]"/>
+      <Dimension value="[700, 400]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -62,7 +62,7 @@
                               <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonDelete" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="284" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jTextFieldFone" min="-2" pref="119" max="-2" attributes="0"/>
@@ -72,7 +72,9 @@
                               <Component id="jTextFieldLogin" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldUsuId" min="-2" pref="79" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonIdUser" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jTxtlabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -90,8 +92,9 @@
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTxtlabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTxtlabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldUsuId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonIdUser" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -120,7 +123,7 @@
                   <Component id="jButtonCreate" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonDelete" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,20 +133,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="  *Id"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldId">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="66" red="cc" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Pesquisar"/>
-        <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="99" type="rgb"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jTxtlabel2">
       <Properties>
@@ -237,6 +226,9 @@
           <Image iconType="3" name="/icones/update.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUpdateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonDelete">
       <Properties>
@@ -244,6 +236,21 @@
           <Image iconType="3" name="/icones/delete.png"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldUsuId">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonIdUser">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pesquisar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIdUserActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

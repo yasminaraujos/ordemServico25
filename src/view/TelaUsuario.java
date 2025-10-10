@@ -31,7 +31,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jTxtlabel1 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
         jTxtlabel2 = new javax.swing.JLabel();
         jTxtlabel3 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
@@ -47,23 +46,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jButtonCreate = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
+        jTextFieldUsuId = new javax.swing.JTextField();
+        jButtonIdUser = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 153, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setPreferredSize(new java.awt.Dimension(921, 552));
+        setPreferredSize(new java.awt.Dimension(700, 400));
 
         jTxtlabel1.setText("  *Id");
-
-        jTextFieldId.setForeground(new java.awt.Color(204, 102, 255));
-        jTextFieldId.setText("Pesquisar");
-        jTextFieldId.setCaretColor(new java.awt.Color(153, 153, 153));
-        jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdActionPerformed(evt);
-            }
-        });
 
         jTxtlabel2.setText("*Campos Obrigatórios");
 
@@ -97,8 +89,22 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         });
 
         jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/update.png"))); // NOI18N
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
 
         jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
+
+        jTextFieldUsuId.setBackground(new java.awt.Color(204, 204, 255));
+
+        jButtonIdUser.setText("Pesquisar");
+        jButtonIdUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIdUserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +138,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(jButtonUpdate)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonDelete)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 284, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jTextFieldFone, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -140,7 +146,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldLogin))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonIdUser)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTxtlabel2))
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.LEADING))
@@ -152,8 +160,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtlabel1)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtlabel2))
+                    .addComponent(jTxtlabel2)
+                    .addComponent(jTextFieldUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonIdUser))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtlabel3)
@@ -177,24 +186,21 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jButtonUpdate)
                     .addComponent(jButtonCreate)
                     .addComponent(jButtonDelete))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIdActionPerformed
-
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         Usuario obj = new Usuario();
-        obj.setUsuario(jTextFieldId.getText());
+        obj.setIdUser(Integer.parseInt(jTextFieldUsuId.getText()));
+        obj.setUsuario(jTextFieldNome.getText());
         obj.setFone (jTextFieldFone.getText());
         obj.setLogin(jTextFieldLogin.getText());
         obj.setSenha(jPasswordField1.getText());
         obj.setPerfil(jComboBox1.getSelectedItem().toString());
-        if ((jTextFieldId.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFieldLogin.getText().isEmpty()) || (jPasswordField1.getPassword().length == 0) || (jComboBox1.getSelectedItem().equals(" "))){
+        if ((jButtonIdUser.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFieldLogin.getText().isEmpty()) || (jPasswordField1.getPassword().length == 0) || (jComboBox1.getSelectedItem().equals(" "))){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
         } else{
             UsuarioDAO dao = new UsuarioDAO();
@@ -202,18 +208,54 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
+    private void jButtonIdUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIdUserActionPerformed
+        if (jButtonIdUser.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "}informe o id do usuário");
+            jButtonIdUser.requestFocus();
+        } else{
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario usuario = new Usuario();
+            usuario = dao.buscarUsuario(Integer.parseInt(jTextFieldUsuId.getText()));
+            jTextFieldNome.setText(usuario.getUsuario());
+            jTextFieldLogin.setText(usuario.getLogin());
+            jPasswordField1.setText(usuario.getSenha());
+            jTextFieldFone.setText(usuario.getFone());
+            jComboBox1.setSelectedItem(usuario.getPerfil());
+            jButtonCreate.setEnabled(false);
+            jButtonUpdate.setEnabled(true);
+            jButtonDelete.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButtonIdUserActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        Usuario obj = new Usuario();
+        obj.setIdUser(Integer.parseInt(jTextFieldUsuId.getText()));
+        obj.setUsuario(jTextFieldNome.getText());
+        obj.setFone (jTextFieldFone.getText());
+        obj.setLogin(jTextFieldLogin.getText());
+        obj.setSenha(jPasswordField1.getText());
+        obj.setPerfil(jComboBox1.getSelectedItem().toString());
+        if ((jButtonIdUser.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFieldLogin.getText().isEmpty()) || (jPasswordField1.getPassword().length == 0) || (jComboBox1.getSelectedItem().equals(" "))){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+        } else{
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.alterarUsuario(obj);
+        }
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreate;
     private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonIdUser;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JCheckBox jCheckBoxSenha;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextFieldFone;
-    private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldUsuId;
     private javax.swing.JLabel jTxtlabel1;
     private javax.swing.JLabel jTxtlabel2;
     private javax.swing.JLabel jTxtlabel3;

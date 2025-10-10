@@ -39,7 +39,7 @@ public class TelaSobre extends javax.swing.JFrame {
         jLabel1.setText("Sitema para gestão de serviços - Ver 1.0");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("@author Yasmin Araujo da Silva");
+        jLabel2.setText("@author Yasmin Araujo da Silva - 2024110310420018");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 255));
@@ -60,7 +60,7 @@ public class TelaSobre extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jLabel4)
