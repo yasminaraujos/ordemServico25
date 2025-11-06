@@ -82,6 +82,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jCheckBoxSenha.setText("Alterar a senha");
 
         jButtonCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/create.png"))); // NOI18N
+        jButtonCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCreateMouseClicked(evt);
+            }
+        });
         jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCreateActionPerformed(evt);
@@ -242,6 +247,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             dao.alterarUsuario(obj);
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCreateMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCreateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

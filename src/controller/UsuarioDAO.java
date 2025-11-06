@@ -46,7 +46,7 @@ public class UsuarioDAO {
             if (rs.next()) {
                 //Usuario logou
                 String perfil = rs.getString(6);
-                if (perfil.equals("Admin")){
+                if (perfil.equals("admin")){
                     TelaPrincipal tela = new TelaPrincipal();
                     tela.setVisible(true);
                     tela.jMNItmUsuario.setEnabled(true);
