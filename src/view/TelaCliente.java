@@ -9,6 +9,7 @@ import com.mysql.cj.protocol.Resultset;
 import com.sun.jdi.connect.spi.Connection;
 import controller.ClienteDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
 
@@ -69,7 +70,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFielEendereco = new javax.swing.JTextField();
+        jTextFielEndereco = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldTelefone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -79,8 +80,23 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 153, 255));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setPreferredSize(new java.awt.Dimension(640, 480));
 
         jTextFieldPesquisa.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPesquisaActionPerformed(evt);
+            }
+        });
+        jTextFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisaKeyReleased(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pesquisar.png"))); // NOI18N
         jLabel1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -132,6 +148,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/update.png"))); // NOI18N
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
 
@@ -149,7 +170,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +188,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFielEendereco))
+                                .addComponent(jTextFielEndereco))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,7 +227,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFielEendereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFielEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -240,8 +261,45 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCreateMouseClicked
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-        
+        Cliente obj = new Cliente();
+        obj.setId(Integer.parseInt(jTextFieldId.getText()));
+        obj.setNome(jTextFieldNome.getText());
+        obj.setEndereco (jTextFielEndereco.getText());
+        obj.setFone(jTextFieldTelefone.getText());
+        obj.setEmail(jTextFieldEmail.getText());
+        //if ((jTextFieldId.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFielEndereco.getText().isEmpty()) || (jTextFieldTelefone.getText().isEmpty())|| jTextFieldEmail.getText().isEmpty()){
+            //JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+        //} else{
+            //ClienteDAO dao = new ClienteDAO();
+            //dao.adicionarCliente(obj);
+        //}
     }//GEN-LAST:event_jButtonCreateActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPesquisaActionPerformed
+
+    private void jTextFieldPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaKeyReleased
+         String nome = "%" + jTextFieldPesquisa.getText() + "%";
+
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.listarClienteNome(nome);
+        DefaultTableModel dados = (DefaultTableModel) tblClientes.getModel();
+        dados.setNumRows(0);
+
+        for (Cliente c : lista) {
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getEndereco(),
+                c.getFone(),
+                c.getEmail(),});
+        }
+    }//GEN-LAST:event_jTextFieldPesquisaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,7 +314,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFielEendereco;
+    private javax.swing.JTextField jTextFielEndereco;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;

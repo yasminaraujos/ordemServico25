@@ -135,39 +135,6 @@ public class ClienteDAO {
         }
         return null;
     }
-    
-     public Cliente buscarClienteNome(int nomecli, Connection conexao) {
-        try {
-            //1 passo - criar o sql
-            String sql = "select * from tbclientes WHERE nomecli = ?;";
-
-            //2 passo o conectar o banco de dados e organizar o comando sql
-            conexao = ModuloConexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, nomecli);
-
-            //3 passo - executar o comando sql
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setId(rs.getInt("idcli"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setEndereco(rs.getString("endereco"));
-                cliente.setFone(rs.getString("fone"));
-                
-                return cliente;
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Cliente não encontrado!!");
-            }
-            stmt.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return null;
-    }
      
     public List<Cliente> listarCliente() {
         try {
@@ -199,4 +166,36 @@ public class ClienteDAO {
             return null;
         }
     }
+     public List<Cliente> listarClienteNome(String nome) {
+        try {
+
+            //1 passo criar a lista
+            List<Cliente> lista = new ArrayList<>();
+
+            //2 passo - criar o sql , organizar e executar.
+            String sql = "select idcli as id, nomecli as nome, endcli as endereço, fonecli as fone, emailcli as email from tbclientes where nomecli like ?";
+            PreparedStatement stmt;
+            stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Cliente obj = new Cliente();
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setEndereco(rs.getString("endereço"));
+                obj.setFone(rs.getString("fone"));
+                obj.setEmail(rs.getString("email"));
+                lista.add(obj);
+            }
+
+            return lista;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro :" + erro);
+            return null;
+        }
+     }
 }

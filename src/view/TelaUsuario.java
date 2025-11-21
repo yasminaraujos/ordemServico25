@@ -53,7 +53,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setPreferredSize(new java.awt.Dimension(640, 480));
 
         jTxtlabel1.setText("  *Id");
 
@@ -141,9 +141,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(jButtonCreate)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonUpdate)
-                                .addGap(18, 18, 18)
+                                .addGap(31, 31, 31)
                                 .addComponent(jButtonDelete)
-                                .addGap(0, 284, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jTextFieldFone, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -154,7 +154,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(jTextFieldUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonIdUser)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                                 .addComponent(jTxtlabel2))
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(48, 48, 48))))
@@ -191,7 +191,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jButtonUpdate)
                     .addComponent(jButtonCreate)
                     .addComponent(jButtonDelete))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
