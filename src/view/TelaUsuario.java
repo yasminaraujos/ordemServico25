@@ -226,9 +226,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             jPasswordField1.setText(usuario.getSenha());
             jTextFieldFone.setText(usuario.getFone());
             jComboBox1.setSelectedItem(usuario.getPerfil());
-            jButtonCreate.setEnabled(false);
-            jButtonUpdate.setEnabled(true);
-            jButtonDelete.setEnabled(true);
+            jButtonCreate.setEnabled(true);
+            jButtonUpdate.setEnabled(false);
+            jButtonDelete.setEnabled(false);
         }
     }//GEN-LAST:event_jButtonIdUserActionPerformed
 

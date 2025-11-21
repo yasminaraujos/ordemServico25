@@ -103,7 +103,7 @@ public class ClienteDAO {
      * @param idCli do tipo inteiro
      * @return Objeto Usuario(model)
      */
-    public Cliente buscarClienteId(int idCli, Connection conexao) {
+    public Cliente buscarClienteId(int idCli) {
         try {
             //1 passo - criar o sql
             String sql = "select * from tbclientes WHERE idcli = ?;";

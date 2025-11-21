@@ -77,7 +77,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jTextFieldEmail = new javax.swing.JTextField();
         jButtonCreate = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 153, 255));
         setClosable(true);
@@ -85,8 +85,30 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(640, 480));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jTextFieldPesquisa.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldPesquisaMouseClicked(evt);
+            }
+        });
         jTextFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPesquisaActionPerformed(evt);
@@ -154,7 +176,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
+        jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +192,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +202,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
@@ -203,7 +225,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonUpdate)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonDelete)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -243,14 +265,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonUpdate)
                             .addComponent(jButtonCreate)))
-                    .addComponent(jButton1)))
+                    .addComponent(jButtonDelete)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
- 
+        jTextFieldId.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),0).toString());
+        jTextFieldNome.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),1).toString());
+        jTextFielEndereco.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),2).toString());
+        jTextFieldTelefone.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),3).toString());
+        jTextFieldEmail.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),4).toString());
+            jButtonCreate.setEnabled(false);
+            jButtonUpdate.setEnabled(true);
+            jButtonDelete.setEnabled(true);
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void jLabel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel1KeyReleased
@@ -276,7 +305,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        
+        if (jTextFieldId.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "}informe o id do usuário");
+            jTextFieldId.requestFocus();
+        } else{
+            ClienteDAO dao = new ClienteDAO();
+            Cliente usuario = new Cliente();
+            usuario = dao.buscarClienteId(Integer.parseInt(jTextFieldId.getText()));
+            jTextFieldNome.setText(usuario.getNome());
+            jTextFielEndereco.setText(usuario.getEndereco());
+            jTextFieldTelefone.setText(usuario.getFone());
+            jTextFieldEmail.setText(usuario.getEmail());
+            jButtonCreate.setEnabled(true);
+            jButtonUpdate.setEnabled(false);
+            jButtonDelete.setEnabled(false);
+        }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaActionPerformed
@@ -301,10 +344,18 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextFieldPesquisaKeyReleased
 
+    private void jTextFieldPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaMouseClicked
+       
+    }//GEN-LAST:event_jTextFieldPesquisaMouseClicked
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        listar();
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCreate;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
