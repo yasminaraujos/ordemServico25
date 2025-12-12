@@ -135,6 +135,30 @@ public class ClienteDAO {
         }
         return null;
     }
+    
+    public void deletarCliente(int idcli) {
+       
+        try{
+        String sql = "delete from tbcliente where idcli = ?";
+            conexao = ModuloConexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+           
+           
+            stmt.setInt(1, idcli);
+           
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!!!");
+        } catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try{
+                conexao.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+    }
      
     public List<Cliente> listarCliente() {
         try {

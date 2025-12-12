@@ -4,24 +4,56 @@
  */
 package view;
 
+
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
+import com.mysql.cj.protocol.Resultset;
+import com.sun.jdi.connect.spi.Connection;
 import controller.ClienteDAO;
+import controller.OrdemServicoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import model.OrdemServico;
 
 /**
  *
  * @author GERAL
  */
 public class TelaOS extends javax.swing.JInternalFrame {
-
+    Connection conexao;
+    PreparedStatementWrapper pst;
+    Resultset st;
+    
+    private String tipo;
     /**
      * Creates new form TelaOS
      */
     public TelaOS() {
         initComponents();
     }
+    /**
+     * Método responsável por listar todos os clientes cadastrados na tabela!!!
+     *
+     */
+    public void listar() {
 
+        ClienteDAO dao = new ClienteDAO();
+
+        List<Cliente> lista = dao.listarCliente();
+        DefaultTableModel dados = (DefaultTableModel) tblClientes.getModel();
+        dados.setNumRows(0);
+
+        for (Cliente c : lista) {
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getEndereco(),
+                c.getFone(),
+                c.getEmail(),});
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +101,23 @@ public class TelaOS extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Ordem de Serviço");
         setPreferredSize(new java.awt.Dimension(640, 480));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLblNumero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLblNumero.setText("N° 05");
@@ -250,6 +299,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         });
 
         jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/update.png"))); // NOI18N
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
 
         jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
 
@@ -268,29 +322,26 @@ public class TelaOS extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(23, 23, 23)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6)
-                                                    .addComponent(jLabel7)))
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTxtDefeito)
-                                            .addComponent(jTxtServico)
-                                            .addComponent(jTxtTecnico)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCbBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTxtEquipamento)))
-                                .addGap(18, 18, 18))))
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTxtDefeito)
+                                    .addComponent(jTxtServico)
+                                    .addComponent(jTxtTecnico)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCbBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTxtEquipamento))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCreate)
@@ -390,7 +441,29 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCreateMouseClicked
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-      
+        if ((jTxtIdCliente.getText().isEmpty()) || (tipo.isEmpty()) || (jTxtEquipamento.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios\nEscolho o cliente!\nSelecione o tipo!\nInforme o equipamento!");
+        } else {
+            OrdemServico obj = new OrdemServico();
+            if (jRBtnOrcamento.isSelected()) {
+                tipo = jRBtnOrcamento.getText();
+            } else if (jRBtnOS.isSelected()) {
+                tipo = jRBtnOS.getText();
+            }
+            Cliente cliente = new Cliente();
+            cliente.setId(Integer.parseInt(jTxtIdCliente.getText()));
+
+            obj.setTipo(tipo);
+            obj.setSituacao(jCbBoxStatus.getSelectedItem().toString());
+            obj.setEquipamento(jTxtEquipamento.getText());
+            obj.setDefeito(jTxtDefeito.getText());
+            obj.setServico(jTxtServico.getText());
+            obj.setTecnico(jTxtTecnico.getText());
+            obj.setValor(Double.parseDouble(jTxtValor.getText()));
+            obj.setCliente(cliente);
+            OrdemServicoDAO dao = new OrdemServicoDAO();
+            dao.adicionarOrdemServico(obj);
+        }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jTxtClientePesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtClientePesquisarKeyReleased
@@ -413,14 +486,24 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         jTxtIdCliente.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),0).toString());
-            jButtonCreate.setEnabled(false);
+            jButtonCreate.setEnabled(true);
             jButtonSearch.setEnabled(true);
-            jButtonDelete.setEnabled(true);
+            jButtonDelete.setEnabled(false);
+            jButtonUpdate.setEnabled(false);
+            jButton3.setEnabled(false);
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        listar();
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

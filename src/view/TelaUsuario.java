@@ -101,6 +101,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         });
 
         jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         jTextFieldUsuId.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -251,6 +256,33 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void jButtonCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCreateMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCreateMouseClicked
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        Usuario obj = new Usuario();
+
+        obj.setUsuario(jTextFieldNome.getText());
+        obj.setFone(jTextFieldFone.getText());
+        obj.setLogin(jTextFieldLogin.getText());
+        obj.setSenha(jPasswordField1.getText());
+       
+        if((jTextFieldUsuId.getText()).isEmpty() || (jTextFieldNome.getText().isEmpty()) || (jTextFieldFone.getText().isEmpty()) || (jTextFieldLogin.getText().isEmpty()) || (jPasswordField1.getText().isEmpty())){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!!");
+        } else{
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.deletarUsuario(WIDTH);
+           
+            jTextFieldUsuId.setText(null);
+            jTextFieldNome.setText(null);
+            jTextFieldLogin.setText(null);
+            jTextFieldFone.setText(null);
+            jPasswordField1.setText(null);
+           
+            jButtonCreate.setEnabled(true);
+            jButtonUpdate.setEnabled(false);
+            jButtonDelete.setEnabled(false);
+       
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

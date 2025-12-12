@@ -292,6 +292,9 @@
           <Image iconType="3" name="/icones/delete.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

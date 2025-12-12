@@ -158,4 +158,27 @@ public class UsuarioDAO {
             }
         }
     }
+     public void deletarUsuario(int IdUser) {
+       
+        try{
+        String sql = "delete from tbusuarios where iduser = ?";
+            con = ModuloConexao.conectar();
+            PreparedStatement stmt = con.prepareStatement(sql);
+           
+           
+            stmt.setInt(1, IdUser);
+           
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!!!");
+        } catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try{
+                con.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+}
 }

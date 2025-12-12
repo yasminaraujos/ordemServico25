@@ -177,6 +177,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/delete.png"))); // NOI18N
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,12 +301,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         obj.setEndereco (jTextFielEndereco.getText());
         obj.setFone(jTextFieldTelefone.getText());
         obj.setEmail(jTextFieldEmail.getText());
-        //if ((jTextFieldId.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFielEndereco.getText().isEmpty()) || (jTextFieldTelefone.getText().isEmpty())|| jTextFieldEmail.getText().isEmpty()){
-            //JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
-        //} else{
-            //ClienteDAO dao = new ClienteDAO();
-            //dao.adicionarCliente(obj);
-        //}
+        if ((jTextFieldId.getText().isEmpty()) || (jTextFieldNome.getText().isEmpty()) || (jTextFielEndereco.getText().isEmpty()) || (jTextFieldTelefone.getText().isEmpty())|| jTextFieldEmail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+        } else{
+            ClienteDAO dao = new ClienteDAO();
+            dao.adicionarCliente(obj, (java.sql.Connection) conexao);
+        }
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
@@ -351,6 +356,34 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         listar();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        Cliente obj = new Cliente();
+
+        obj.setNome(jTextFieldNome.getText());
+        obj.setFone(jTextFieldTelefone.getText());
+        obj.setEmail(jTextFieldEmail.getText());
+        obj.setEndereco(jTextFielEndereco.getText());
+       
+        if((jTextFieldId.getText()).isEmpty() || (jTextFieldNome.getText().isEmpty()) || (jTextFieldTelefone.getText().isEmpty()) || (jTextFielEndereco.getText().isEmpty()) || (jTextFieldEmail.getText().isEmpty())){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!!");
+        } else{
+            ClienteDAO dao = new ClienteDAO();
+            dao.deletarCliente(Integer.parseInt(jTextFieldId.getText()));
+           
+            jTextFieldId.setText(null);
+            jTextFieldNome.setText(null);
+            jTextFielEndereco.setText(null);
+            jTextFieldTelefone.setText(null);
+            jTextFieldEmail.setText(null);
+           
+            jButtonCreate.setEnabled(true);
+            jButtonUpdate.setEnabled(false);
+            jButtonDelete.setEnabled(false);
+           
+            listar();
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
